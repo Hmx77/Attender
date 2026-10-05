@@ -39,3 +39,11 @@ Import this directory as a Next.js project. Install using `pnpm install --frozen
 `pnpm typecheck` checks TypeScript. `pnpm build` creates the production build.
 
 A live Supabase project is needed to verify Auth and Realtime end to end. In separate browser sessions, sign in as employee and HR. Request Office check-in, verify it appears for HR, approve, verify employee In time, then check out and confirm HR Out updates. Repeat for Remote. Check isolation with a second employee. No real users or fabricated attendance are seeded by this app.
+
+## ICONIC monthly attendance update
+
+For an existing installation, apply `supabase/migrations/202610050001_daily_attendance.sql` before deploying this update. It preserves historical rows and RLS, adds the server UAE date RPC, and serializes check-in/approval on the employee profile to prevent new attendance after same-day checkout. Existing duplicate historical rows are retained. New installations apply both migrations in filename order.
+
+Both portals default to the server's current UAE month. Arrow navigation filters by the official `work_date`; pending HR records use their request date in Asia/Dubai. HR pending approvals stay visible independently of the selected month. The Today card stays independent of the historical month and keeps previous-day open sessions available for checkout. Monthly summaries count distinct attended dates, never hours. Profile `full_name` is used verbatim; administrators can set real names in Supabase.
+
+The supplied ICONIC JPEG is displayed using object-fit and right alignment to handle its empty black padding without distorting the mark.
