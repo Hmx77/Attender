@@ -46,4 +46,4 @@ For an existing installation, apply `supabase/migrations/202610050001_daily_atte
 
 Both portals default to the server's current UAE month. Arrow navigation filters by the official `work_date`; pending HR records use their request date in Asia/Dubai. HR pending approvals stay visible independently of the selected month. The Today card stays independent of the historical month and keeps previous-day open sessions available for checkout. Monthly summaries count distinct attended dates, never hours. Profile `full_name` is used verbatim; administrators can set real names in Supabase.
 
-The supplied ICONIC JPEG is displayed using object-fit and right alignment to handle its empty black padding without distorting the mark.
+The exact supplied ICONIC JPEG is displayed in full using object-fit: contain, its original 275:96 aspect ratio, and no added background, border radius, or cropping. The shared header applies this display on login and both dashboards.
