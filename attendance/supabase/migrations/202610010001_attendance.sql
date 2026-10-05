@@ -29,7 +29,7 @@ create function public.is_hr() returns boolean language sql stable security defi
  select exists(select 1 from public.profiles where id = auth.uid() and role = 'hr');
 $$;
 -- Change UTC here before applying if your business uses another IANA timezone.
-create function public.attendance_timezone() returns text language sql immutable set search_path = '' as $$ select 'UTC'::text; $$;
+create function public.attendance_timezone() returns text language sql immutable set search_path = '' as $$ select 'Asia/Dubai'::text; $$;
 create policy profiles_read on public.profiles for select to authenticated using (id = (select auth.uid()) or (select public.is_hr()));
 create policy attendance_read on public.attendance for select to authenticated using (employee_id = (select auth.uid()) or (select public.is_hr()));
 -- No direct table mutations. Only the narrowly scoped RPCs below can write.
